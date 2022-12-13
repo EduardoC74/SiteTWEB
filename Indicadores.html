@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indicadores</title>
+    <link href="indicadores.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      google.charts.load('current', {
+            'packages':['bar','corechart','table']
+          });
+          google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        /*Gráfico Etários*/
+        var data = google.visualization.arrayToDataTable([
+          ['Idades', 'Masculino', 'Feminino', 'Total'],
+          ['≤6', 370, 342, 712],
+          ['7-64', 4420, 4981, 9401],
+          ['65-74', 682, 1071, 1753],
+          ['≥75', 695, 1278, 1973]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Inscritos na USF',
+          },
+          // titulo dos y
+          vAxes: {
+                    0: {
+                        title: 'Número de Inscritos'
+                    },
+                },
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+
+        //Opções do grafico etario
+        var options1 = {
+                width: '70%',
+                height: '100%',
+            }
+
+        /*Orçamento*/
+        var data = google.visualization.arrayToDataTable([
+          ['setor', 'valor'],
+          ['Salários dos médicos e Enfermeiros', 115406],
+          ['Salários dos Assistentes Operacionais, Secretários clinicos e Internos',82340],
+          ['Serviços de Limpeza', 5400],
+          ['Manutenção de Equipamentos', 7874],
+        ]);
+
+        var options = {
+          title: '',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+
+        /*Indice de dependência*/
+        var data = google.visualization.arrayToDataTable([
+          ['Setor', 'Índice'],
+          ['Jovens', 214],
+          ['Idosos', 1634],
+          ['Total',  2848]
+        ]);
+
+        var options = {
+          title: '',
+          pieHole: 0.4,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+
+        /*Tabela dos médicos*/
+        var data1 = new google.visualization.DataTable();
+            data1.addColumn('string', 'Nome Do Médico');
+            data1.addColumn('number', 'Total De Utentes');
+            data1.addColumn('number', 'Total De Unidades Ponderadas');
+            data1.addRows([
+                ['Jaime Manuel Silva Cavadas', {
+                    v: 1743
+                }, {
+                    v: 2349
+                }],
+                ['Jose Luis Martins Costa Lima', {
+                    v: 1792
+                }, {
+                    v: 2503.5
+                }],
+                ['Maria Carmo Moreira Gonçalves Ramalho', {
+                    v: 1698
+                }, {
+                    v: 2281.5
+                }],
+                ['Maria Helena Castro Faria Costa Lima', {
+                    v: 1799
+                }, {
+                    v: 2414
+                }],
+                ['Maria Joaquina Marques Filipe', {
+                    v: 1758
+                }, {
+                    v: 2354.5
+                }],
+                ['Maria Manuela Ribeiro De Sousa Ruivo', {
+                    v: 1710
+                }, {
+                    v: 2314
+                }],
+                ['Rosa Maria Ferreira Laracho Da Silva', {
+                    v: 1741
+                }, {
+                    v: 2525.5
+                }],
+                ['Silvia Paula Simoes Guimaraes', {
+                    v: 1737
+                }, {
+                    v: 2245.5
+                }]
+            ]);
+
+            var table = new google.visualization.Table(document.getElementById('table_div'));
+            table.draw(data1, options1);
+
+        /*Gráfico de linhas dos internamentos*/
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Internamentos'],
+          ['2015',138],
+          ['2016', 112],
+          ['2017', 146],
+          ['2018', 97],
+          ['2019', 51],
+          ['2020', 63]
+        ]);
+          var options = {
+                chart: {
+                    title: '',
+                },
+                curveType: 'function',
+                legend: { position: 'bottom' },
+                // titulo dos y
+                vAxes: {
+                    0: {
+                        title: 'Número de Internamentos'
+                    },
+                },
+
+            };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+
+      }
+
+      google.charts.setOnLoadCallback(drawVisualization);
+
+      function drawVisualization() {
+        // Some raw data (not necessarily accurate)
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'Crianças', 'Jovens', 'Mulheres', 'Homens','Total','Mortes'],
+          ['Setembro ',  37   ,      115,        167,      268,       587,    0],
+          ['Outubro ',  33,          123,        263,      354,       773,    4],
+          ['Novembro ',  41,         142,        301,      456,       940,    8],
+          ['Dezembro ',  37,         137,        292,      447,       913,   13],
+          ['Janeiro ',  21,           59,        265,      397,       742,    7]
+        ]);
+
+        var options = {
+          title : '',
+          vAxis: {title: 'Número de casos'},
+          hAxis: {title: 'Meses'},
+          seriesType: 'bars',
+          series: {5: {type: 'line'}}
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+
+    </script>
+  </head>
+  <body>
+    <div class="topnav" id="myTopnav">
+      <a style="margin-top:0px" id="logo" href="PrincipalNovo.html" title="USF PortoCentro">
+              <img src="Logo USFPC.jpg" style="margin-left:1px" alt="logo" width="50" height="50">
+          </a>
+      <a href="Quem somos.html">Quem somos</a>
+       <div class="dropdown">
+        <button class="dropbtn">O que fazemos
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="O que fazemos.html">O que fazemos</a>
+          <a href="Consultas.html">Consultas</a>	
+        </div>
+      </div> 
+      <a href="Indicadores.html" >Indicadores</a>
+          <a href="Recursos.html" >Recursos</a>
+          <a href="Mais apoio.html" >Mais apoio</a>
+          <div class="direita">
+          <a href="login.html" >Login</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+            </a>
+          </div>
+    </div>
+  </br>
+  <section  class="margemsection ">
+      <h1>Indicadores</h1>
+      <div class="flex-container">
+        <div class="flex-item-left">
+          <div class="columnchart_material">
+        <h2>Grupos Etários</h2>
+      <div id="columnchart_material" style=" height: 350px;"></div>
+          </div>
+        </div>
+        <div class="flex-item-right">
+          <div class="piechart_3d">
+        <h2>Orçamento da USF</h2>
+      <div id="piechart_3d" style=" height: 330px;"></div>
+          </div>
+        </div>
+      </div>
+    </br>
+    <div class="table_div">
+      <h2>Tabela Médicos</h2>
+      <div id="table_div" style="height: 300px;"></div>
+    </div>
+  </br>
+  <div class="flex-container">
+    <div class="flex-item-left">
+      <div class="curve_chart">
+        <h2>Número de internamentos</h2>
+      <div id="curve_chart" style=" height: 350px"></div>
+      </div>
+    </div>
+    <div class="flex-item-right">
+      <div class="top_x_div">
+      <h2>Índice de dependência</h2>
+    <div id="donutchart" style=" height: 300px;"></div>
+      </div>
+    </div>
+  </div>
+    </br>
+     <div class="chart_div">
+       <h2>Casos de covid 20/21</h2>
+     <div id="chart_div" style=" height: 500px;"></div>
+     </div>
+     </section>
+    </br>
+    <script>
+      function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+    </script>
+</br>
+<footer class="footer">
+        
+    <p>USF PortoCentro<br>
+    Rua de Santos Pousada, 297 - 1º<br>
+    4000-486 Porto, PORTUGAL<br>
+     Contacte-nos<br>
+     (351) 225191360</p>
+     <h3>Redes Sociais:</h3>
+    <div class="centrartexto">
+     <a href="https://www.facebook.com/pages/category/Medical---Health/USF-PortoCentro-113082843768864/" target="_blank">
+        <img class="redessociais" src="facebook.png" width="30" height="30" >
+    </a>
+   </div>
+ </footer>
+</body>
+</html>
